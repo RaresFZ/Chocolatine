@@ -19,6 +19,9 @@ jobs:
   check_coding_style:
     runs-on: ubuntu-latest
     container: ghcr.io/epitech/coding-style-checker:latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
