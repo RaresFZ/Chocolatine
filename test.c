@@ -6,6 +6,6 @@ FF15
 
 int main(void)
 {
-    printf("hello worlds\n");
+    printf("hello world\n");
     return 0;
 }
