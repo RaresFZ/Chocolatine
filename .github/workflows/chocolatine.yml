@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2023
+## chocolatine
+## File description:
+## chocolatine
+##
+
 name: chocolatine
 
 on:
@@ -9,12 +16,12 @@ on:
       - 'ga-ignore-**'
 
 jobs:
-  coding_style_check:
+  check_coding_style:
     runs-on: ubuntu-latest
     container: ghcr.io/epitech/coding-style-checker:latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: coding style
         run: check.sh $(pwd) $(pwd)
@@ -36,12 +43,12 @@ jobs:
 
   checking_compilation:
     runs-on: ubuntu-latest
-    needs: coding_style_check
+    needs: check_coding_style
     timeout-minutes: 2
     container: epitechcontent/epitest-docker:latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: compilation
         run: make
@@ -66,7 +73,7 @@ jobs:
     container: epitechcontent/epitest-docker:latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: compile_tests
         run: make tests_run
