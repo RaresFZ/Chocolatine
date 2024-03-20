@@ -41,7 +41,7 @@ jobs:
             exit 1
           fi
 
-  checking_compilation:
+  check_program_compilation:
     runs-on: ubuntu-latest
     needs: check_coding_style
     timeout-minutes: 2
@@ -68,7 +68,7 @@ jobs:
 
   run_tests:
     runs-on: ubuntu-latest
-    needs: checking_compilation
+    needs: check_program_compilation
     timeout-minutes: 2
     container: epitechcontent/epitest-docker:latest
     steps:
