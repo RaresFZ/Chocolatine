@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: coding style
-        run: check.sh $(pwd) $(pwd)
+        run: check.sh . /tmp
 
       - name: Create annotation for coding-style errors
         run:  |
