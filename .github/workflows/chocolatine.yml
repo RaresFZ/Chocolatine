@@ -38,7 +38,7 @@ jobs:
         run: |
           STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
           if [ $STYLE_ERROR -gt 0 ]; then
-            echo "::add-mask::toto"
+            echo "toto"
             exit 1
           fi
 
