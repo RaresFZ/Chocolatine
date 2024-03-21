@@ -80,9 +80,6 @@ jobs:
 
   push_to_mirror:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
     needs: run_tests
     if: github.event_name == 'push'
     steps:
