@@ -10,10 +10,10 @@ name: chocolatine
 on:
   push:
     branches-ignore:
-      - 'ga-ignore-'
+      - 'ga-ignore-**'
   pull_request:
     branches-ignore:
-      - 'ga-ignore-'
+      - 'ga-ignore-**'
 
 jobs:
   check_coding_style:
