@@ -35,7 +35,7 @@ jobs:
           done < $input
           STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
           if [ $STYLE_ERROR -gt 0 ]; then
-            exit
+            exit 1
           fi
 
   check_program_compilation:
