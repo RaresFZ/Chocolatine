@@ -33,9 +33,6 @@ jobs:
             array=(`echo $ERRORS | sed 's/:/\n/g'`)
             echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
           done
-
-      - name: Report style
-        run: |
           if [[ -n $CODING_STYLE_ERRORS ]]
           then
             exit 1
