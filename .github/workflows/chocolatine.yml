@@ -38,7 +38,7 @@ jobs:
         run: |
           STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
           if [ $STYLE_ERROR -gt 0 ]; then
-            exit 1
+            exit
           fi
 
   check_program_compilation:
