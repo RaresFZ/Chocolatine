@@ -28,16 +28,16 @@ jobs:
 
       - name: Create annotation for coding-style errors
         run:  |
-          CODING_STYLE_ERRORS=$(cat $(pwd)/coding-style-reports.log)
-          for ERRORS in $CODING_STYLE_ERRORS; do
+          STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log)
+          for ERRORS in $STYLE_ERROR; do
             array=(`echo $ERRORS | sed 's/:/\n/g'`)
             echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
           done
 
       - name: Report style
         run: |
-          NB_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
-          if [ $NB_ERROR -gt 0 ]; then
+          STYLE_ERROR=$(cat /tmp/coding-style-reports.log | wc -l)
+          if [ $STYLE_ERROR -gt 0 ]; then
             exit 1
           fi
 
