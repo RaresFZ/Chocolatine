@@ -36,9 +36,11 @@ jobs:
 
       - name: Report style
         run: |
-          STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
-          if [ $STYLE_ERROR -gt 0 ]; then
+          if [[ -n $CODING_STYLE_ERRORS ]]
+          then
             exit 1
+          else
+            echo No coding style errors detected
           fi
 
   check_program_compilation:
