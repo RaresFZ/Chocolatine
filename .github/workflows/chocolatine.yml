@@ -36,11 +36,9 @@ jobs:
 
       - name: Report style
         run: |
-          if [[ -n $CODING_STYLE_ERRORS ]]
-          then
+          NB_ERROR=$(cat /tmp/coding-style-reports.log | wc -l)
+          if [ $NB_ERROR -gt 0 ]; then
             exit 1
-          else
-            echo No coding style errors detected
           fi
 
   check_program_compilation:
