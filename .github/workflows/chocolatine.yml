@@ -28,11 +28,11 @@ jobs:
 
       - name: Create annotation for coding-style errors
         run:  |
-          input=$(pwd)/coding-style-reports.log
+          style_error=$(pwd)/coding-style-reports.log
           while IFS= read -r -a line; do
             fields=($(printf "%s" "$line"|cut -d':' --output-delimiter=' ' -f1-))
             echo "::error title=${fields[2]} coding style error,file=${fields[0]},line=${fields[1]}::${fields[3]}"
-          done < $input
+          done < $style_error
 
       - name: Report style
         run: |
