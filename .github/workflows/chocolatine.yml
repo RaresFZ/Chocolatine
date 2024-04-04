@@ -29,10 +29,15 @@ jobs:
       - name: Create annotation for coding-style errors
         run:  |
           readarray -t STYLE_ERROR < "$(pwd)/coding-style-reports.log"
+              
           for ERRORS in "${STYLE_ERROR[@]}"; do
               IFS=':' read -ra array <<< "$ERRORS"
-              echo "::error file=${array[1]#./},title=${array[3]#./}::${array[2]#./}:${array[4]#./}"
+              file="${array[1]#./}"
+              line="${array[2]}"
+              error="${array[4]#./}"
+              echo "::error file=$file,line=$line::Coding style error: $error"
           done
+
 
       - name: Report style
         run: |
