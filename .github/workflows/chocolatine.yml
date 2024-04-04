@@ -26,19 +26,19 @@ jobs:
       - name: coding style
         run: check.sh $(pwd) $(pwd)
 
-      - name: Coding stye
+      - name: Create annotation for coding-style errors
+        run:  |
+          input=/tmp/coding-style-reports.log
+          while IFS= read -r -a line; do
+            fields=($(printf "%s" "$line"|cut -d':' --output-delimiter=' ' -f1-))
+            echo "::error title=${fields[2]} coding style error,file=${fields[0]},line=${fields[1]}::${fields[3]}"
+          done < $input
+
+      - name: Report style
         run: |
-          check.sh $(pwd) $(pwd)
-          CODING_STYLE_ERRORS=$(cat $(pwd)/coding-style-reports.log)
-          for ERRORS in $CODING_STYLE_ERRORS; do
-            array=(`echo $ERRORS | sed 's/:/\n/g'`)
-            echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
-          done
-          if [[ -n $CODING_STYLE_ERRORS ]]
-          then
+          STYLE_ERROR=$(cat $(pwd)/coding-style-reports.log | wc -l)
+          if [ $STYLE_ERROR -gt 0 ]; then
             exit 1
-          else
-            echo No coding style errors detected
           fi
 
   check_program_compilation:
