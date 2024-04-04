@@ -28,12 +28,13 @@ jobs:
 
       - name: Create annotation for coding-style errors
         run:  |
-          STYLE_ERROR=$(<$(pwd)/coding-style-reports.log)
-          IFS=':'
-          while read -r FILENAME LINE_NUMBER ERROR_TYPE DESCRIPTION _; do
-              echo "::error file=${FILENAME#./},line=${LINE_NUMBER}::Coding style error (${ERROR_TYPE}): ${DESCRIPTION}"
-          done <<< "$STYLE_ERROR"
-
+          STYLE_ERROR=$(cat "$(pwd)/coding-style-reports.log")
+      
+          IFS=$'\n'
+          for ERRORS in $STYLE_ERROR; do
+              array=($(echo "$ERRORS" | sed 's/:/\n/g'))
+              echo "::error file=${array[1]#./},title=${array[3]#./} coding style errors detected: ${array[2]#./}::${array[4]#./}"
+          done
 
       - name: Report style
         run: |
